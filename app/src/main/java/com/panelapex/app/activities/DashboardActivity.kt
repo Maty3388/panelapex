@@ -48,7 +48,7 @@ class DashboardActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.tvStatTotal)?.text = "${stats.optInt("total")}"
                 findViewById<TextView>(R.id.tvStatActive)?.text = "${stats.optInt("active")}"
                 findViewById<TextView>(R.id.tvStatDemos)?.text = "${stats.optInt("demos")}"
-                findViewById<TextView>(R.id.tvStatClients)?.text = "${stats.optInt("clients")}"
+
                 findViewById<TextView>(R.id.tvCredits)?.text = "${credits.optInt("credits")}"
             } catch (_: Exception) {}
         }

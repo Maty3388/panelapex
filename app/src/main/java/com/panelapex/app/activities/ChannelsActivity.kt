@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.panelapex.app.R
 import com.panelapex.app.services.ApiService
 import kotlinx.coroutines.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
 class ChannelsActivity : AppCompatActivity() {
@@ -72,7 +74,4 @@ class ChannelsActivity : AppCompatActivity() {
     override fun onDestroy() { super.onDestroy(); scope.cancel() }
 }
 
-fun String.toRequestBody(mediaType: okhttp3.MediaType) =
-    okhttp3.RequestBody.create(mediaType, this)
 
-fun String.toMediaType() = okhttp3.MediaType.parse(this)!!
