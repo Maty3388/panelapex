@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.panelapex.app.R
 import com.panelapex.app.services.ApiService
 import kotlinx.coroutines.*
+import java.io.File
+import java.io.FileWriter
 import org.json.JSONObject
 
 class UsersActivity : AppCompatActivity() {
@@ -46,6 +48,7 @@ class UsersActivity : AppCompatActivity() {
         })
 
         loadUsers()
+        findViewById<View>(R.id.btnExport)?.setOnClickListener { exportCSV() }
     }
 
     override fun onResume() { super.onResume(); loadUsers() }
@@ -111,6 +114,7 @@ class UsersActivity : AppCompatActivity() {
                         if (res.optBoolean("success")) {
                             Toast.makeText(this@UsersActivity, "Guardado ✓", Toast.LENGTH_SHORT).show()
                             loadUsers()
+        findViewById<View>(R.id.btnExport)?.setOnClickListener { exportCSV() }
                         }
                     } catch (_: Exception) {}
                 }
@@ -129,6 +133,7 @@ class UsersActivity : AppCompatActivity() {
                     if (res.optBoolean("success")) {
                         Toast.makeText(this@UsersActivity, "Renovado ✓", Toast.LENGTH_SHORT).show()
                         loadUsers()
+        findViewById<View>(R.id.btnExport)?.setOnClickListener { exportCSV() }
                     } else {
                         Toast.makeText(this@UsersActivity, res.optString("error", "Error"), Toast.LENGTH_SHORT).show()
                     }
@@ -146,10 +151,36 @@ class UsersActivity : AppCompatActivity() {
                     if (res.optBoolean("success")) {
                         Toast.makeText(this@UsersActivity, "Eliminado ✓", Toast.LENGTH_SHORT).show()
                         loadUsers()
+        findViewById<View>(R.id.btnExport)?.setOnClickListener { exportCSV() }
                     }
                 }
             }
             .setNegativeButton("Cancelar", null).show()
+    }
+
+    private fun exportCSV() {
+        scope.launch {
+            try {
+                val file = File(getExternalFilesDir(null), "usuarios_${System.currentTimeMillis()}.csv")
+                val writer = FileWriter(file)
+                writer.append("Email,Rol,Vencimiento,Estado
+")
+                allUsers.forEach { user ->
+                    writer.append("${user.optString("email")},${user.optString("role")},${user.optString("subscription_end").take(10)},${if (user.optBoolean("blocked")) "Bloqueado" else "Activo"}
+")
+                }
+                writer.flush(); writer.close()
+                val uri = androidx.core.content.FileProvider.getUriForFile(this@UsersActivity, "${packageName}.provider", file)
+                val intent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+                    type = "text/csv"
+                    putExtra(android.content.Intent.EXTRA_STREAM, uri)
+                    addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+                startActivity(android.content.Intent.createChooser(intent, "Exportar usuarios"))
+            } catch (_: Exception) {
+                Toast.makeText(this@UsersActivity, "Error al exportar", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroy() { super.onDestroy(); scope.cancel() }

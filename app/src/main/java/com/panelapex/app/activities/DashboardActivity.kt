@@ -30,6 +30,9 @@ class DashboardActivity : AppCompatActivity() {
         findViewById<android.view.View>(R.id.btnCredits)?.setOnClickListener {
             startActivity(Intent(this, CreditsActivity::class.java))
         }
+        findViewById<android.view.View>(R.id.btnHistorial)?.setOnClickListener {
+            startActivity(Intent(this, HistorialActivity::class.java))
+        }
         findViewById<android.view.View>(R.id.btnChannels)?.setOnClickListener {
             startActivity(Intent(this, ChannelsActivity::class.java))
         }
