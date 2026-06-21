@@ -34,7 +34,7 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, HistorialActivity::class.java))
         }
         findViewById<android.view.View>(R.id.btnChannels)?.setOnClickListener {
-            startActivity(Intent(this, ChannelsActivity::class.java))
+            startActivity(Intent(this, ChannelsListActivity::class.java))
         }
         findViewById<android.view.View>(R.id.btnLogout)?.setOnClickListener {
             Prefs.logout(this)

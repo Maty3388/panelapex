@@ -103,6 +103,43 @@ object ApiService {
         } catch (_: Exception) { JSONObject() }
     }
 
+
+    fun getChannels(): List<JSONObject> {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/channels?limit=5000")
+                .header("Authorization", "Bearer $token").build()).execute()
+            val json = JSONObject(res.body?.string() ?: return emptyList())
+            val arr = json.optJSONArray("channels") ?: return emptyList()
+            (0 until arr.length()).map { arr.getJSONObject(it) }
+        } catch (_: Exception) { emptyList() }
+    }
+
+    fun editChannel(id: String, body: JSONObject): JSONObject {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/channels/$id")
+                .header("Authorization", "Bearer $token")
+                .put(body.toString().toRequestBody("application/json".toMediaType())).build()).execute()
+            JSONObject(res.body?.string() ?: "{}")
+        } catch (_: Exception) { JSONObject() }
+    }
+
+    fun deleteChannel(id: String): JSONObject {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/channels/$id")
+                .header("Authorization", "Bearer $token").delete().build()).execute()
+            JSONObject(res.body?.string() ?: "{}")
+        } catch (_: Exception) { JSONObject() }
+    }
+
+    fun createChannel(body: JSONObject): JSONObject {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/channels")
+                .header("Authorization", "Bearer $token")
+                .post(body.toString().toRequestBody("application/json".toMediaType())).build()).execute()
+            JSONObject(res.body?.string() ?: "{}")
+        } catch (_: Exception) { JSONObject() }
+    }
+
     fun assignCredits(userId: String, credits: Int): JSONObject {
         return try {
             val body = JSONObject().put("userId", userId).put("credits", credits)
