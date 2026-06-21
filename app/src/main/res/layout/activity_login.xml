@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/background" android:gravity="center"
+    android:orientation="vertical" android:padding="32dp">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="PANEL APEX" android:textColor="@color/primary"
+        android:textSize="32sp" android:textStyle="bold" android:fontFamily="serif"
+        android:layout_marginBottom="8dp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Panel de administración" android:textColor="@color/text_secondary"
+        android:textSize="13sp" android:layout_marginBottom="40dp"/>
+
+    <EditText android:id="@+id/etEmail"
+        android:layout_width="match_parent" android:layout_height="52dp"
+        android:hint="Email" android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_hint" android:textSize="15sp"
+        android:background="@color/surface2" android:paddingHorizontal="16dp"
+        android:inputType="textEmailAddress" android:layout_marginBottom="12dp"/>
+
+    <EditText android:id="@+id/etPassword"
+        android:layout_width="match_parent" android:layout_height="52dp"
+        android:hint="Contraseña" android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_hint" android:textSize="15sp"
+        android:background="@color/surface2" android:paddingHorizontal="16dp"
+        android:inputType="textPassword" android:layout_marginBottom="8dp"/>
+
+    <TextView android:id="@+id/tvError"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:textColor="@color/error" android:textSize="12sp"
+        android:layout_marginBottom="16dp" android:visibility="gone"/>
+
+    <Button android:id="@+id/btnLogin"
+        android:layout_width="match_parent" android:layout_height="52dp"
+        android:text="INGRESAR" android:textColor="@color/background"
+        android:textStyle="bold" android:backgroundTint="@color/primary"
+        android:layout_marginBottom="16dp"/>
+
+    <ProgressBar android:id="@+id/progressBar"
+        android:layout_width="36dp" android:layout_height="36dp"
+        android:visibility="gone" android:indeterminateTint="@color/primary"/>
+</LinearLayout>
