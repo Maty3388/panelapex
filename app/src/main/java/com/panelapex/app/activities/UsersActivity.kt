@@ -163,11 +163,10 @@ class UsersActivity : AppCompatActivity() {
             try {
                 val file = File(getExternalFilesDir(null), "usuarios_${System.currentTimeMillis()}.csv")
                 val writer = FileWriter(file)
-                writer.append("Email,Rol,Vencimiento,Estado
-")
+                writer.append("Email,Rol,Vencimiento,Estado\n")
                 allUsers.forEach { user ->
-                    writer.append("${user.optString("email")},${user.optString("role")},${user.optString("subscription_end").take(10)},${if (user.optBoolean("blocked")) "Bloqueado" else "Activo"}
-")
+                    val line = "${user.optString("email")},${user.optString("role")},${user.optString("subscription_end").take(10)},${if (user.optBoolean("blocked")) "Bloqueado" else "Activo"}\n"
+                    writer.append(line)
                 }
                 writer.flush(); writer.close()
                 val uri = androidx.core.content.FileProvider.getUriForFile(this@UsersActivity, "${packageName}.provider", file)
