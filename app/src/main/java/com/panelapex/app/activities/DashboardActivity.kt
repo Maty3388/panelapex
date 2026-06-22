@@ -30,6 +30,9 @@ class DashboardActivity : AppCompatActivity() {
         findViewById<android.view.View>(R.id.btnCredits)?.setOnClickListener {
             startActivity(Intent(this, CreditsActivity::class.java))
         }
+        findViewById<android.view.View>(R.id.btnExpiring)?.setOnClickListener {
+            startActivity(Intent(this, ExpiringActivity::class.java))
+        }
         findViewById<android.view.View>(R.id.btnMovies)?.setOnClickListener {
             startActivity(Intent(this, MoviesActivity::class.java))
         }

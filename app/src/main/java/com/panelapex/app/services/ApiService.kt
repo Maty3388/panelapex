@@ -213,6 +213,14 @@ object ApiService {
         } catch (_: Exception) { JSONObject() }
     }
 
+    fun getExpiring(days: Int): JSONObject {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/admin/expiring?days=$days")
+                .header("Authorization", "Bearer $token").build()).execute()
+            JSONObject(res.body?.string() ?: "{}")
+        } catch (_: Exception) { JSONObject() }
+    }
+
     fun assignCredits(userId: String, credits: Int): JSONObject {
         return try {
             val body = JSONObject().put("userId", userId).put("credits", credits)
