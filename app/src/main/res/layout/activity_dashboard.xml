@@ -107,6 +107,46 @@
                 android:text="›" android:textColor="@color/primary" android:textSize="24sp"/>
         </LinearLayout>
 
+        <LinearLayout android:id="@+id/btnMovies"
+            android:layout_width="match_parent" android:layout_height="64dp"
+            android:background="@color/surface" android:gravity="center_vertical"
+            android:paddingHorizontal="20dp" android:orientation="horizontal"
+            android:layout_marginBottom="8dp" android:clickable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="🎬" android:textSize="24sp" android:layout_marginEnd="16dp"/>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Películas" android:textColor="@color/text_primary"
+                    android:textSize="16sp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Gestionar catálogo de películas"
+                    android:textColor="@color/text_secondary" android:textSize="12sp"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textColor="@color/primary" android:textSize="24sp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/btnSeries"
+            android:layout_width="match_parent" android:layout_height="64dp"
+            android:background="@color/surface" android:gravity="center_vertical"
+            android:paddingHorizontal="20dp" android:orientation="horizontal"
+            android:layout_marginBottom="8dp" android:clickable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="📺" android:textSize="24sp" android:layout_marginEnd="16dp"/>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Series" android:textColor="@color/text_primary"
+                    android:textSize="16sp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Gestionar catálogo de series"
+                    android:textColor="@color/text_secondary" android:textSize="12sp"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textColor="@color/primary" android:textSize="24sp"/>
+        </LinearLayout>
+
         <LinearLayout android:id="@+id/btnHistorial"
             android:layout_width="match_parent" android:layout_height="64dp"
             android:background="@color/surface" android:gravity="center_vertical"

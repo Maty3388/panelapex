@@ -140,6 +140,79 @@ object ApiService {
         } catch (_: Exception) { JSONObject() }
     }
 
+
+    fun getMovies(): List<JSONObject> {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/movies?limit=500")
+                .header("Authorization", "Bearer $token").build()).execute()
+            val json = JSONObject(res.body?.string() ?: return emptyList())
+            val arr = json.optJSONArray("movies") ?: return emptyList()
+            (0 until arr.length()).map { arr.getJSONObject(it) }
+        } catch (_: Exception) { emptyList() }
+    }
+
+    fun createMovie(body: JSONObject): JSONObject {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/movies")
+                .header("Authorization", "Bearer $token")
+                .post(body.toString().toRequestBody("application/json".toMediaType())).build()).execute()
+            JSONObject(res.body?.string() ?: "{}")
+        } catch (_: Exception) { JSONObject() }
+    }
+
+    fun editMovie(id: String, body: JSONObject): JSONObject {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/movies/$id")
+                .header("Authorization", "Bearer $token")
+                .put(body.toString().toRequestBody("application/json".toMediaType())).build()).execute()
+            JSONObject(res.body?.string() ?: "{}")
+        } catch (_: Exception) { JSONObject() }
+    }
+
+    fun deleteMovie(id: String): JSONObject {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/movies/$id")
+                .header("Authorization", "Bearer $token").delete().build()).execute()
+            JSONObject(res.body?.string() ?: "{}")
+        } catch (_: Exception) { JSONObject() }
+    }
+
+    fun getSeries(): List<JSONObject> {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/series")
+                .header("Authorization", "Bearer $token").build()).execute()
+            val json = JSONObject(res.body?.string() ?: return emptyList())
+            val arr = json.optJSONArray("series") ?: return emptyList()
+            (0 until arr.length()).map { arr.getJSONObject(it) }
+        } catch (_: Exception) { emptyList() }
+    }
+
+    fun createSerie(body: JSONObject): JSONObject {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/series")
+                .header("Authorization", "Bearer $token")
+                .post(body.toString().toRequestBody("application/json".toMediaType())).build()).execute()
+            JSONObject(res.body?.string() ?: "{}")
+        } catch (_: Exception) { JSONObject() }
+    }
+
+    fun editSerie(id: String, body: JSONObject): JSONObject {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/series/$id")
+                .header("Authorization", "Bearer $token")
+                .put(body.toString().toRequestBody("application/json".toMediaType())).build()).execute()
+            JSONObject(res.body?.string() ?: "{}")
+        } catch (_: Exception) { JSONObject() }
+    }
+
+    fun deleteSerie(id: String): JSONObject {
+        return try {
+            val res = client.newCall(Request.Builder().url("$BASE/series/$id")
+                .header("Authorization", "Bearer $token").delete().build()).execute()
+            JSONObject(res.body?.string() ?: "{}")
+        } catch (_: Exception) { JSONObject() }
+    }
+
     fun assignCredits(userId: String, credits: Int): JSONObject {
         return try {
             val body = JSONObject().put("userId", userId).put("credits", credits)
