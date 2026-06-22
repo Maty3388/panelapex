@@ -48,7 +48,7 @@ class ChannelsActivity : AppCompatActivity() {
                 val res = withContext(Dispatchers.IO) {
                     val reqBody = body.toString().toRequestBody("application/json".toMediaType())
                     val req = okhttp3.Request.Builder()
-                        .url("http://31.40.212.205:25461/channels")
+                        .url("http://149.104.92.205:25461/channels")
                         .header("Authorization", "Bearer ${ApiService.token}")
                         .post(reqBody).build()
                     val response = okhttp3.OkHttpClient().newCall(req).execute()
